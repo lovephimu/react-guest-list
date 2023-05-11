@@ -1,0 +1,55 @@
+// imports
+
+// variables
+
+// -colors
+$backgroundColor: #555f61;
+$bgColorGrey: #a7afb2;
+
+$shadowColorInset: #ffffff93;
+$shadowColorOffset: #00000034;
+
+$frameColorWhite: #ffffff;
+$frameColorGreyBright: #dadedf;
+$frameColorGreyDark: #373d3f;
+$frameColorBlack: #131516;
+
+// -values
+$borderRadius: 8px;
+
+$maxWidth: 1200px;
+
+// Background Elements
+body {
+  background-color: $backgroundColor;
+  font-size: 1rem;
+}
+
+// Middleground Elements
+
+.basicBox {
+  background-color: $bgColorGrey;
+  border: none;
+  // border: 1px dotted $frameColorWhite;
+  border-radius: $borderRadius;
+  box-shadow: inset 0px 0px 16px $shadowColorInset,
+    0px 16px 16px $shadowColorOffset;
+  padding: 20px;
+  margin: 20px;
+  max-width: $maxWidth;
+}
+
+.basicFlex {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: $maxWidth;
+}
+
+// Texts: Noto, weight 200, 300, 400, 500
+
+* {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+// Links & Hover

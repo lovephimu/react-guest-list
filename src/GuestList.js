@@ -4,8 +4,8 @@ export default function GuestList() {
   return (
     <>
       <h1>HelloWorld</h1>
-      <form>Form</form>
-      <div>Guest</div>
+      <form className={styles.basicBox}>Form</form>
+      <div className={styles.basicBox}>Guest</div>
     </>
   );
 }
