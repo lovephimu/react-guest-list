@@ -14,6 +14,9 @@ $frameColorGreyBright: #dadedf;
 $frameColorGreyDark: #373d3f;
 $frameColorBlack: #131516;
 
+$textColorMedium: #8c979a;
+$textColorMediumDark: #6f7c80;
+
 // -values
 $borderRadius: 8px;
 
@@ -28,6 +31,7 @@ body {
 // Middleground Elements
 
 .basicBox {
+  box-sizing: border-box;
   background-color: $bgColorGrey;
   border: none;
   // border: 1px dotted $frameColorWhite;
@@ -46,10 +50,46 @@ body {
   max-width: $maxWidth;
 }
 
+.structureBox {
+  width: 50%;
+}
+
+input {
+  margin: 5px 0 0 0;
+  background: none;
+  border: 1px dotted #cecece;
+  border-radius: 4px;
+  color: #cecece;
+  font-size: 1em;
+  padding: 4px;
+  box-sizing: border-box;
+  // outline: none; /* remove the default focus outline or maybe not*/
+  flex-wrap: wrap;
+}
+input:first-of-type {
+  margin: 5px 5px 0 0;
+}
+input:focus {
+  border-color: $frameColorGreyDark;
+  outline: none;
+}
+input::placeholder {
+  color: $textColorMediumDark;
+}
+
 // Texts: Noto, weight 200, 300, 400, 500
 
 * {
   font-family: 'Noto Sans', sans-serif;
+}
+
+.subText {
+  font-size: 0.75em;
+}
+
+h1 {
+  font-weight: 500;
+  color: $textColorMedium;
 }
 
 // Links & Hover
