@@ -7,6 +7,7 @@ $backgroundColor: #555f61;
 $bgColorGrey: #a7afb2;
 
 $shadowColorInset: #ffffff93;
+$shadowColorInsetMedium: #ffffff60;
 $shadowColorOffset: #00000034;
 
 $frameColorWhite: #ffffff;
@@ -62,12 +63,25 @@ body {
   align-items: center;
 }
 
+.basicJustifySelfFlexEnd {
+  justify-content: flex-end;
+}
+
 .basicGap {
   gap: 16px;
 }
 
-.basicJustifySelfFlexEnd {
-  justify-content: flex-end;
+.basicBottomMargin {
+  margin-bottom: 40px;
+}
+
+.basicMarginSmall {
+  margin-top: 2px;
+  margin-bottom: 1px;
+}
+
+.basicShadowMedium {
+  box-shadow: inset 0px 0px 16px $shadowColorInsetMedium;
 }
 
 .structureBox {

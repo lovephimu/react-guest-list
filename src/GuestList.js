@@ -5,38 +5,73 @@ export default function GuestList() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [allGuests, setAllGuests] = useState([]);
+  const [attending, setAttending] = useState(false);
+  const [dummyArray, setDummyArray] = useState([
+    { id: '1', firstName: 'Karl', lastName: 'Horky', attending: false },
+    { id: '2', firstName: 'Will', lastName: 'Chill', attending: false },
+    { id: '3', firstName: 'Hannah', lastName: 'Banana', attending: false },
+    { id: '4', firstName: 'Agnes', lastName: 'Magnus', attending: false },
+  ]);
 
   useEffect(() => {
-    async function getGuests() {
-      const response = await fetch('http://localhost:4000/guests');
-      const data = await response.json();
+    console.log(dummyArray);
+  }, [dummyArray]);
 
-      await console.log(data);
+  // useEffect(() => {
+  //   async function getGuests() {
+  //     const response = await fetch('http://localhost:4000/guests');
+  //     const data = await response.json();
 
-      await setAllGuests([data]); // copying old data, pushing new fetched data and updating state in one go
-    }
-    getGuests().catch((error) => {
-      console.log(error);
-    });
-  }, []);
+  //     await console.log(data);
+
+  //     await setAllGuests([data]); // copying old data, pushing new fetched data and updating state in one go
+  //   }
+  //   getGuests().catch((error) => {
+  //     console.log(error);
+  //   });
+  // }, []);
 
   function handleSubmit() {}
 
-  async function updateGuest() {
-    const response = await fetch('http://localhost:4000/guests/1', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ attending: true }),
-    });
+  function updateGuest(id, booleanItem) {
+    // const response = await fetch('http://localhost:4000/guests/1', {
+    //   method: 'PUT',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ attending: true }),
+    // });
+    const newAttendingStatus = booleanItem;
+    // arraymethode search and replace .attending
+  }
+
+  function createGuest(firstNameParameter, lastNameParameter) {
+    // const response = await fetch(`http://localhost:4000/guests`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     firstName: firstNameParameter,
+    //     lastName: lastNameParameter,
+    //   }),
+    // });
+    console.log(firstNameParameter, lastNameParameter);
+    const response = {
+      id: dummyArray.length + 1,
+      firstName: firstNameParameter,
+      lastName: lastNameParameter,
+      attending: false,
+    };
+    console.log(response);
+    setDummyArray([...dummyArray, response]);
   }
 
   return (
     <>
       <h1 className={styles.basicFlex}>Guest List</h1>
       <form
-        className={styles.basicBox}
+        className={`${styles.basicBox} ${styles.basicBottomMargin}`}
         onSubmit={(event) => {
           event.preventDefault();
         }}
@@ -59,49 +94,62 @@ export default function GuestList() {
           <input
             id="firstName"
             value={firstName}
-            onChange={() => {}}
+            onChange={(event) => {
+              setFirstName(event.currentTarget.value);
+            }}
             placeholder="First name"
             className={styles.structureBox}
           />
           <input
             id="lastName"
             value={lastName}
-            onChange={() => {}}
+            onChange={(event) => {
+              setLastName(event.currentTarget.value);
+            }}
             placeholder="Last name"
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
-                handleSubmit();
+                createGuest(firstName, lastName);
               }
             }}
             className={styles.structureBox}
           />
         </div>
       </form>
-      <section>
-        <div data-test-id="guest" className={styles.basicBox}>
-          <div
-            className={`${styles.basicFlex} ${styles.basicJustifyLeft} ${styles.basicAlignCenter} ${styles.basicGap}`}
-          >
-            <div>🤍</div>
-            <span className={styles.guestName}>
-              {allGuests[0].firstName} {allGuests[0].lastName}
-            </span>
-            <span>:</span>
-            <span>not attending</span>
+      {dummyArray.map((item) => {
+        return (
+          <section key={`user-${item.id}`}>
             <div
-              className={`${styles.basicFlex} ${styles.basicFlexItem} ${styles.basicJustifySelfFlexEnd} ${styles.basicAlignCenter} ${styles.basicGap}`}
+              data-test-id="guest"
+              className={`${styles.basicBox} ${styles.basicShadowMedium} ${styles.basicMarginSmall}`}
             >
-              <input
-                type="checkbox"
-                aria-label="attending"
-                checked
-                onChange={() => {}}
-              />
-              <button aria-label="Remove firstName lastName">Remove</button>
+              <div
+                className={`${styles.basicFlex} ${styles.basicJustifyLeft} ${styles.basicAlignCenter} ${styles.basicGap}`}
+              >
+                <div>🤍</div>
+                <span className={styles.guestName}>
+                  {item.firstName} {item.lastName}
+                </span>
+                <span>:</span>
+                <span>{item.attending ? 'attending' : 'not attending'}</span>
+                <div
+                  className={`${styles.basicFlex} ${styles.basicFlexItem} ${styles.basicJustifySelfFlexEnd} ${styles.basicAlignCenter} ${styles.basicGap}`}
+                >
+                  <input
+                    type="checkbox"
+                    aria-label="attending"
+                    checked={item.attending}
+                    onChange={(event) => {
+                      updateGuest(item.id, event.currentTarget.checked);
+                    }}
+                  />
+                  <button aria-label="Remove firstName lastName">Remove</button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        );
+      })}
     </>
   );
 }
