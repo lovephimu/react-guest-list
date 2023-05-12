@@ -50,6 +50,26 @@ body {
   max-width: $maxWidth;
 }
 
+.basicFlexItem {
+  flex: 1;
+}
+
+.basicJustifyLeft {
+  justify-content: flex-start;
+}
+
+.basicAlignCenter {
+  align-items: center;
+}
+
+.basicGap {
+  gap: 16px;
+}
+
+.basicJustifySelfFlexEnd {
+  justify-content: flex-end;
+}
+
 .structureBox {
   width: 50%;
 }
@@ -57,7 +77,7 @@ body {
 input {
   margin: 5px 0 0 0;
   background: none;
-  border: 1px dotted #cecece;
+  border: 1px dotted $frameColorWhite;
   border-radius: 4px;
   color: #cecece;
   font-size: 1em;
@@ -85,6 +105,10 @@ input::placeholder {
 
 .subText {
   font-size: 0.75em;
+}
+
+.guestName {
+  font-weight: 500;
 }
 
 h1 {
