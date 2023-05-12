@@ -14,7 +14,6 @@ export default function GuestList() {
       await console.log(data);
 
       await setAllGuests([data]); // copying old data, pushing new fetched data and updating state in one go
-      console.log(allGuests);
     }
     getGuests().catch((error) => {
       console.log(error);
@@ -78,7 +77,7 @@ export default function GuestList() {
           />
         </div>
       </form>
-      {/* <section>
+      <section>
         <div data-test-id="guest" className={styles.basicBox}>
           <div
             className={`${styles.basicFlex} ${styles.basicJustifyLeft} ${styles.basicAlignCenter} ${styles.basicGap}`}
@@ -102,7 +101,7 @@ export default function GuestList() {
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
     </>
   );
 }
