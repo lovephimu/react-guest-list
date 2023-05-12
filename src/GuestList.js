@@ -126,7 +126,7 @@ export default function GuestList() {
               <div
                 className={`${styles.basicFlex} ${styles.basicJustifyLeft} ${styles.basicAlignCenter} ${styles.basicGap}`}
               >
-                <div>🤍</div>
+                <div>{item.attending ? '💗' : '🤍'}</div>
                 <span className={styles.guestName}>
                   {item.firstName} {item.lastName}
                 </span>
@@ -138,7 +138,7 @@ export default function GuestList() {
                   <input
                     type="checkbox"
                     aria-label="attending"
-                    checked={item.attending}
+                    // checked={item.attending}
                     onChange={(event) => {
                       updateGuest(item.id, event.currentTarget.checked);
                     }}
