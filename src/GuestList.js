@@ -30,7 +30,7 @@ export default function GuestList() {
     getGuests().catch((error) => {
       console.log(error);
     });
-  }, []);
+  }, [allGuests]);
 
   return (
     <>
