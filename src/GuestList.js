@@ -9,18 +9,13 @@ export default function GuestList() {
   useEffect(() => {
     async function getGuests() {
       const response = await fetch('http://localhost:4000/guests');
-      console.log('fetching');
       const data = await response.json();
-      setAllGuests([data.results[0]]);
-      console.log(allGuests);
-      // console.log('copying');
-      // const currentGuests = [...allGuests];
-      // console.log('pushing');
-      // setAllGuests([...currentGuests, data[0]]);
-      // console.log('setting');
-      // console.log(allGuests);
-    }
 
+      await console.log(data);
+
+      await setAllGuests([data]); // copying old data, pushing new fetched data and updating state in one go
+      console.log(allGuests);
+    }
     getGuests().catch((error) => {
       console.log(error);
     });
