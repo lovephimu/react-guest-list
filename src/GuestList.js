@@ -6,31 +6,37 @@ export default function GuestList() {
   const [lastName, setLastName] = useState('');
   const [allGuests, setAllGuests] = useState([]);
 
-  function handleSubmit() {}
-
-  // async function updateGuest() {
-  //   const response = await fetch('http://localhost:4000/guests/1', {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({ attending: true }),
-  //   });
-  // }
-
   useEffect(() => {
     async function getGuests() {
       const response = await fetch('http://localhost:4000/guests');
-      console.log(response);
+      console.log('fetching');
       const data = await response.json();
-      const currentGuests = [...allGuests];
-      setAllGuests([...currentGuests, data[0]]);
+      setAllGuests([data.results[0]]);
+      console.log(allGuests);
+      // console.log('copying');
+      // const currentGuests = [...allGuests];
+      // console.log('pushing');
+      // setAllGuests([...currentGuests, data[0]]);
+      // console.log('setting');
+      // console.log(allGuests);
     }
 
     getGuests().catch((error) => {
       console.log(error);
     });
-  }, [allGuests]);
+  }, []);
+
+  function handleSubmit() {}
+
+  async function updateGuest() {
+    const response = await fetch('http://localhost:4000/guests/1', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ attending: true }),
+    });
+  }
 
   return (
     <>
@@ -59,12 +65,14 @@ export default function GuestList() {
           <input
             id="firstName"
             value={firstName}
+            onChange={() => {}}
             placeholder="First name"
             className={styles.structureBox}
           />
           <input
             id="lastName"
             value={lastName}
+            onChange={() => {}}
             placeholder="Last name"
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
@@ -75,7 +83,7 @@ export default function GuestList() {
           />
         </div>
       </form>
-      <section>
+      {/* <section>
         <div data-test-id="guest" className={styles.basicBox}>
           <div
             className={`${styles.basicFlex} ${styles.basicJustifyLeft} ${styles.basicAlignCenter} ${styles.basicGap}`}
@@ -89,12 +97,17 @@ export default function GuestList() {
             <div
               className={`${styles.basicFlex} ${styles.basicFlexItem} ${styles.basicJustifySelfFlexEnd} ${styles.basicAlignCenter} ${styles.basicGap}`}
             >
-              <input type="checkbox" aria-label="attending" checked />
+              <input
+                type="checkbox"
+                aria-label="attending"
+                checked
+                onChange={() => {}}
+              />
               <button aria-label="Remove firstName lastName">Remove</button>
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }
