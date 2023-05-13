@@ -4,28 +4,19 @@ import styles from './GuestList.module.scss';
 export default function GuestList() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [allGuests, setAllGuests] = useState([]);
-  const [attending, setAttending] = useState(false);
-  const [dummyArray, setDummyArray] = useState([
-    { id: '1', firstName: 'Karl', lastName: 'Horky', attending: false },
-    { id: '2', firstName: 'Will', lastName: 'Chill', attending: false },
-    { id: '3', firstName: 'Hannah', lastName: 'Banana', attending: false },
-    { id: '4', firstName: 'Agnes', lastName: 'Magnus', attending: false },
-  ]);
+  const [dummyArray, setDummyArray] = useState([]);
 
   useEffect(() => {
+    console.log('This is what I got:');
     console.log(dummyArray);
   }, [dummyArray]);
 
+  async function getGuests() {
+    const response = await fetch('http://localhost:4000/guests');
+    const data = await response.json();
+    await setDummyArray(data); // copying old data, pushing new fetched data and updating state in one go
+  }
   useEffect(() => {
-    async function getGuests() {
-      const response = await fetch('http://localhost:4000/guests');
-      const data = await response.json();
-
-      await console.log(data);
-
-      await setAllGuests([data]); // copying old data, pushing new fetched data and updating state in one go
-    }
     getGuests().catch((error) => {
       console.log(error);
     });
@@ -43,10 +34,9 @@ export default function GuestList() {
       }),
     });
 
-    const response = await fetch('http://localhost:4000/guests');
-    const data = await response.json();
-
-    console.log(data.result);
+    getGuests().catch((error) => {
+      console.log(error);
+    });
 
     // const response = {
     //   id: dummyArray.length + 1,
