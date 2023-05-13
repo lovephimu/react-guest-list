@@ -17,21 +17,45 @@ export default function GuestList() {
     console.log(dummyArray);
   }, [dummyArray]);
 
-  // useEffect(() => {
-  //   async function getGuests() {
-  //     const response = await fetch('http://localhost:4000/guests');
-  //     const data = await response.json();
+  useEffect(() => {
+    async function getGuests() {
+      const response = await fetch('http://localhost:4000/guests');
+      const data = await response.json();
 
-  //     await console.log(data);
+      await console.log(data);
 
-  //     await setAllGuests([data]); // copying old data, pushing new fetched data and updating state in one go
-  //   }
-  //   getGuests().catch((error) => {
-  //     console.log(error);
-  //   });
-  // }, []);
+      await setAllGuests([data]); // copying old data, pushing new fetched data and updating state in one go
+    }
+    getGuests().catch((error) => {
+      console.log(error);
+    });
+  }, []);
 
-  function handleSubmit() {}
+  async function createGuest(firstNameParameter, lastNameParameter) {
+    await fetch(`http://localhost:4000/guests`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstName: firstNameParameter,
+        lastName: lastNameParameter,
+      }),
+    });
+
+    const response = await fetch('http://localhost:4000/guests');
+    const data = await response.json();
+
+    console.log(data.result);
+
+    // const response = {
+    //   id: dummyArray.length + 1,
+    //   firstName: firstNameParameter,
+    //   lastName: lastNameParameter,
+    //   attending: false,
+    // };
+    setDummyArray([...dummyArray, ...data]);
+  }
 
   function updateGuest(id, booleanItem) {
     // const response = await fetch('http://localhost:4000/guests/1', {
@@ -41,30 +65,35 @@ export default function GuestList() {
     //   },
     //   body: JSON.stringify({ attending: true }),
     // });
-    const newAttendingStatus = booleanItem;
-    // arraymethode search and replace .attending
+
+    setDummyArray(
+      dummyArray.map((item) => {
+        if (item.id === id) {
+          item.attending = booleanItem;
+        }
+
+        return item;
+      }),
+    );
+
+    // setDummyArray(
+    //   dummyArray.map((item) =>
+    //     item.id === id ? (item.attending = booleanItem) : item,
+    //   ),
+    // );
   }
 
-  function createGuest(firstNameParameter, lastNameParameter) {
-    // const response = await fetch(`http://localhost:4000/guests`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     firstName: firstNameParameter,
-    //     lastName: lastNameParameter,
-    //   }),
-    // });
-    console.log(firstNameParameter, lastNameParameter);
-    const response = {
-      id: dummyArray.length + 1,
-      firstName: firstNameParameter,
-      lastName: lastNameParameter,
-      attending: false,
-    };
-    console.log(response);
-    setDummyArray([...dummyArray, response]);
+  function deleteGuest(id) {
+    // const response = await fetch(`${baseUrl}/guests/1`, { method: 'DELETE' });
+    // const deletedGuest = await response.json();
+
+    // console.log(deletedGuest);
+
+    const filterArray = dummyArray.filter(
+      (currentValue) => currentValue.id !== id,
+    );
+
+    setDummyArray(filterArray);
   }
 
   return (
@@ -109,7 +138,9 @@ export default function GuestList() {
             placeholder="Last name"
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
-                createGuest(firstName, lastName);
+                createGuest(firstName, lastName).catch((error) => {
+                  console.log(error);
+                });
               }
             }}
             className={styles.structureBox}
@@ -143,7 +174,14 @@ export default function GuestList() {
                       updateGuest(item.id, event.currentTarget.checked);
                     }}
                   />
-                  <button aria-label="Remove firstName lastName">Remove</button>
+                  <button
+                    aria-label="Remove firstName lastName"
+                    onClick={() => {
+                      deleteGuest(item.id);
+                    }}
+                  >
+                    Remove
+                  </button>
                 </div>
               </div>
             </div>
