@@ -21,6 +21,7 @@ export default function GuestList() {
     getGuests().catch((error) => {
       console.log(error);
     });
+    setLoading(false);
   }, []);
 
   // onChange useEffect
@@ -78,7 +79,7 @@ export default function GuestList() {
           <input
             id="firstName"
             value={firstName}
-            disabled={guestListArray.length >= 1 ? false : true}
+            disabled={loading}
             onChange={(event) => {
               setFirstName(event.currentTarget.value);
             }}
@@ -88,7 +89,7 @@ export default function GuestList() {
           <input
             id="lastName"
             value={lastName}
-            disabled={guestListArray.length >= 1 ? false : true}
+            disabled={loading}
             onChange={(event) => {
               setLastName(event.currentTarget.value);
             }}
