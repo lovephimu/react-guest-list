@@ -6,18 +6,18 @@ export default function GuestList() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [guestListArray, setGuestListArray] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   async function getGuests() {
     const response = await fetch('http://localhost:4000/guests');
     const data = await response.json();
     await setGuestListArray(data); // copying old data, pushing new fetched data and updating state in one go
-    setLoading(false);
   }
 
   // first load useEffect
 
   useEffect(() => {
+    setLoading(true);
     getGuests().catch((error) => {
       console.log(error);
     });
