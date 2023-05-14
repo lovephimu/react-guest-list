@@ -21,7 +21,6 @@ export default function GuestList() {
     getGuests().catch((error) => {
       console.log(error);
     });
-    setLoading(false);
   }, []);
 
   // onChange useEffect
@@ -31,11 +30,6 @@ export default function GuestList() {
       setLoading(false);
     }
   }, [guestListArray]);
-
-  useEffect(() => {
-    console.log('Loading status:');
-    console.log(loading);
-  }, [loading]);
 
   async function createGuest(firstNameParameter, lastNameParameter) {
     await fetch(`http://localhost:4000/guests`, {
