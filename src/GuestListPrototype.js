@@ -78,7 +78,7 @@ export default function GuestList() {
           <input
             id="firstName"
             value={firstName}
-            disabled={loading}
+            disabled={loading ? true : false}
             onChange={(event) => {
               setFirstName(event.currentTarget.value);
             }}
@@ -88,7 +88,7 @@ export default function GuestList() {
           <input
             id="lastName"
             value={lastName}
-            disabled={loading}
+            disabled={loading ? true : false}
             onChange={(event) => {
               setLastName(event.currentTarget.value);
             }}
