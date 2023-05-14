@@ -5,13 +5,13 @@ import styles from './GuestList.module.scss';
 export default function GuestList() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [dummyArray, setDummyArray] = useState([]);
+  const [guestListArray, setGuestListArray] = useState([]);
   const [loading, setLoading] = useState(true);
 
   async function getGuests() {
     const response = await fetch('http://localhost:4000/guests');
     const data = await response.json();
-    await setDummyArray(data); // copying old data, pushing new fetched data and updating state in one go
+    await setGuestListArray(data); // copying old data, pushing new fetched data and updating state in one go
     setLoading(false);
   }
 
@@ -26,10 +26,10 @@ export default function GuestList() {
   // onChange useEffect
 
   useEffect(() => {
-    if (dummyArray.length >= 1) {
+    if (guestListArray.length >= 1) {
       setLoading(false);
     }
-  }, [dummyArray]);
+  }, [guestListArray]);
 
   useEffect(() => {
     console.log('Loading status:');
@@ -104,7 +104,7 @@ export default function GuestList() {
           />
         </div>
       </form>
-      {loading ? <div>Loading...</div> : <Guest list={dummyArray} />}
+      {loading ? <div>Loading...</div> : <Guest list={guestListArray} />}
     </>
   );
 }
