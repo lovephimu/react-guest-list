@@ -12,6 +12,9 @@ export default function GuestList() {
     const response = await fetch('http://localhost:4000/guests');
     const data = await response.json();
     await setDummyArray(data); // copying old data, pushing new fetched data and updating state in one go
+    if (data) {
+      setLoading(false);
+    }
   }
 
   // first load useEffect
@@ -24,13 +27,13 @@ export default function GuestList() {
 
   // onChange useEffect
 
-  useEffect(() => {
-    if (dummyArray.length < 1) {
-      setLoading(true);
-    } else {
-      setLoading(false);
-    }
-  }, [dummyArray]);
+  // useEffect(() => {
+  //   if (dummyArray.length < 1) {
+  //     setLoading(true);
+  //   } else {
+  //     setLoading(false);
+  //   }
+  // }, [dummyArray]);
 
   useEffect(() => {
     console.log('Loading status:');
