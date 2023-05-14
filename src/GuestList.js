@@ -16,10 +16,6 @@ export default function GuestList() {
   // first load useEffect
 
   useEffect(() => {
-    if (dummyArray.length < 1) {
-      setLoading(true);
-    }
-
     getGuests().catch((error) => {
       console.log(error);
     });
@@ -31,6 +27,19 @@ export default function GuestList() {
     console.log('This is what I got:');
     console.log(dummyArray);
   }, [dummyArray]);
+
+  useEffect(() => {
+    if (dummyArray.length < 1) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [dummyArray]);
+
+  useEffect(() => {
+    console.log('Loading status:');
+    console.log(loading);
+  }, [loading]);
 
   async function createGuest(firstNameParameter, lastNameParameter) {
     await fetch(`http://localhost:4000/guests`, {
