@@ -23,10 +23,6 @@ export default function GuestList() {
     });
   }, []);
 
-  if (guestListArray >= 1) {
-    setLoading(false);
-  }
-
   // onChange useEffect
 
   useEffect(() => {
