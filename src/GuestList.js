@@ -135,6 +135,7 @@ export default function GuestList() {
           />
         </div>
       </form>
+      {loading ? <div>Loading...</div> : <div>not loading</div>}
       {dummyArray.map((item) => {
         return (
           <section key={`user-${item.id}`}>
