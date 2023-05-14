@@ -11,6 +11,7 @@ export default function GuestList() {
   async function getGuests() {
     const response = await fetch('http://localhost:4000/guests');
     const data = await response.json();
+    setLoading(false);
     await setDummyArray(data); // copying old data, pushing new fetched data and updating state in one go
   }
 
