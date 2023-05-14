@@ -67,16 +67,13 @@ export default function GuestList() {
           event.preventDefault();
         }}
       >
-            <label htmlFor="firstName">First name</label>
         <div className={styles.basicFlex}>
-          {/* <div className={`${styles.structureBox} ${styles.subText}`}> */}
+          <div className={`${styles.structureBox} ${styles.subText}`}>
+            <label htmlFor="firstName">First name</label>
           </div>
-          <label
-            htmlFor="lastName"
-            className={`${styles.structureBox} ${styles.subText}`}
-          >
-            Last name
-          </label>
+          <div className={`${styles.structureBox} ${styles.subText}`}>
+            <label htmlFor="lastName">Last name</label>
+          </div>
         </div>
         <div className={styles.basicFlex}>
           <input
