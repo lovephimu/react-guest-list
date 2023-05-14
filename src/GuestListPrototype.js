@@ -72,13 +72,13 @@ export default function GuestList() {
             htmlFor="firstName"
             className={`${styles.structureBox} ${styles.subText}`}
           >
-            First Name
+            First name
           </label>
           <label
             htmlFor="lastName"
             className={`${styles.structureBox} ${styles.subText}`}
           >
-            Last Name
+            Last name
           </label>
         </div>
         <div className={styles.basicFlex}>
