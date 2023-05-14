@@ -5,22 +5,32 @@ export default function GuestList() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dummyArray, setDummyArray] = useState([]);
-
-  useEffect(() => {
-    console.log('This is what I got:');
-    console.log(dummyArray);
-  }, [dummyArray]);
+  const [loading, setLoading] = useState(true);
 
   async function getGuests() {
     const response = await fetch('http://localhost:4000/guests');
     const data = await response.json();
     await setDummyArray(data); // copying old data, pushing new fetched data and updating state in one go
   }
+
+  // first load useEffect
+
   useEffect(() => {
+    if (dummyArray.length < 1) {
+      setLoading(true);
+    }
+
     getGuests().catch((error) => {
       console.log(error);
     });
   }, []);
+
+  // onChange useEffect
+
+  useEffect(() => {
+    console.log('This is what I got:');
+    console.log(dummyArray);
+  }, [dummyArray]);
 
   async function createGuest(firstNameParameter, lastNameParameter) {
     await fetch(`http://localhost:4000/guests`, {
@@ -34,56 +44,35 @@ export default function GuestList() {
       }),
     });
 
+    setFirstName('');
+
+    setLastName('');
+
     getGuests().catch((error) => {
       console.log(error);
     });
-
-    // const response = {
-    //   id: dummyArray.length + 1,
-    //   firstName: firstNameParameter,
-    //   lastName: lastNameParameter,
-    //   attending: false,
-    // };
-    setDummyArray([...dummyArray, ...data]);
   }
 
-  function updateGuest(id, booleanItem) {
-    // const response = await fetch('http://localhost:4000/guests/1', {
-    //   method: 'PUT',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ attending: true }),
-    // });
+  async function updateGuest(id, booleanItem) {
+    await fetch(`http://localhost:4000/guests/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ attending: booleanItem }),
+    });
 
-    setDummyArray(
-      dummyArray.map((item) => {
-        if (item.id === id) {
-          item.attending = booleanItem;
-        }
-
-        return item;
-      }),
-    );
-
-    // setDummyArray(
-    //   dummyArray.map((item) =>
-    //     item.id === id ? (item.attending = booleanItem) : item,
-    //   ),
-    // );
+    getGuests().catch((error) => {
+      console.log(error);
+    });
   }
 
-  function deleteGuest(id) {
-    // const response = await fetch(`${baseUrl}/guests/1`, { method: 'DELETE' });
-    // const deletedGuest = await response.json();
+  async function deleteGuest(id) {
+    await fetch(`http://localhost:4000/guests/${id}`, { method: 'DELETE' });
 
-    // console.log(deletedGuest);
-
-    const filterArray = dummyArray.filter(
-      (currentValue) => currentValue.id !== id,
-    );
-
-    setDummyArray(filterArray);
+    getGuests().catch((error) => {
+      console.log(error);
+    });
   }
 
   return (
@@ -158,16 +147,22 @@ export default function GuestList() {
                 >
                   <input
                     type="checkbox"
-                    aria-label="attending"
-                    // checked={item.attending}
+                    checked={item.attending}
+                    aria-label={`${item.firstName.toLowerCase()} ${item.lastName.toLowerCase()} attending status`}
                     onChange={(event) => {
-                      updateGuest(item.id, event.currentTarget.checked);
+                      updateGuest(item.id, event.currentTarget.checked).catch(
+                        (error) => {
+                          console.log(error);
+                        },
+                      );
                     }}
                   />
                   <button
-                    aria-label="Remove firstName lastName"
+                    aria-label={`Remove ${item.firstName} ${item.lastName}`}
                     onClick={() => {
-                      deleteGuest(item.id);
+                      deleteGuest(item.id).catch((error) => {
+                        console.log(error);
+                      });
                     }}
                   >
                     Remove

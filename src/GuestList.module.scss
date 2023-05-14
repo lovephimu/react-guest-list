@@ -4,7 +4,8 @@
 
 // -colors
 $backgroundColor: #555f61;
-$bgColorGrey: #a7afb2;
+$backgroundColorGrey: #a7afb2;
+$backgroundColorMagenta: #e649a0;
 
 $shadowColorInset: #ffffff93;
 $shadowColorInsetMedium: #ffffff60;
@@ -15,6 +16,7 @@ $frameColorGreyBright: #dadedf;
 $frameColorGreyDark: #373d3f;
 $frameColorBlack: #131516;
 
+$textColor: #000000;
 $textColorMedium: #8c979a;
 $textColorMediumDark: #6f7c80;
 
@@ -33,7 +35,7 @@ body {
 
 .basicBox {
   box-sizing: border-box;
-  background-color: $bgColorGrey;
+  background-color: $backgroundColorGrey;
   border: none;
   // border: 1px dotted $frameColorWhite;
   border-radius: $borderRadius;
@@ -93,11 +95,10 @@ input {
   background: none;
   border: 1px dotted $frameColorWhite;
   border-radius: 4px;
-  color: #cecece;
+  color: $textColor;
   font-size: 1em;
   padding: 4px;
   box-sizing: border-box;
-  // outline: none; /* remove the default focus outline or maybe not*/
   flex-wrap: wrap;
 }
 input:first-of-type {
@@ -109,6 +110,10 @@ input:focus {
 }
 input::placeholder {
   color: $textColorMediumDark;
+}
+
+input[type='checkbox']:checked {
+  background-color: $backgroundColorMagenta;
 }
 
 // Texts: Noto, weight 200, 300, 400, 500
