@@ -23,10 +23,10 @@ export default function GuestList() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   setLoading(false);
-  //   console.log('set to false');
-  // }, [guestListArray]);
+  useEffect(() => {
+    setLoading(false);
+    console.log('set to false');
+  }, [loading]);
 
   async function createGuest(firstNameParameter, lastNameParameter) {
     await fetch(baseUrl, {
