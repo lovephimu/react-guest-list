@@ -48,7 +48,7 @@ export default function GuestList() {
   }
 
   if (loading) {
-    return <div>loading...</div>;
+    return <div>Loading...</div>;
   }
 
   return (
