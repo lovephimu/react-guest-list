@@ -3,11 +3,11 @@ import Guest from './Guest';
 import styles from './GuestList.module.scss';
 
 export default function GuestList() {
+  const [input, setInput] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [guestListArray, setGuestListArray] = useState([]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [guestListArray, setGuestListArray] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [input, setInput] = useState(true);
 
   async function getGuests() {
     const response = await fetch('http://localhost:4000/guests');
