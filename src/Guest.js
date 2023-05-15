@@ -3,19 +3,21 @@ import styles from './GuestList.module.scss';
 
 export default function Guest(props) {
   const [guestArray, setGuestArray] = useState([]);
+  const baseUrl =
+    'http://b5d6641b-b2e6-4cd0-8ab9-a642bd4fe26e.id.repl.co/guests/';
 
   useEffect(() => {
     setGuestArray([...props.list]);
   }, [props.list]);
 
   async function getGuests() {
-    const response = await fetch('http://localhost:4000/guests');
+    const response = await fetch(baseUrl);
     const data = await response.json();
     await setGuestArray(data); // copying old data, pushing new fetched data and updating state in one go
   }
 
   async function updateGuest(id, booleanItem) {
-    await fetch(`http://localhost:4000/guests/${id}`, {
+    await fetch(baseUrl + id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -29,7 +31,7 @@ export default function Guest(props) {
   }
 
   async function deleteGuest(id) {
-    await fetch(`http://localhost:4000/guests/${id}`, { method: 'DELETE' });
+    await fetch(baseUrl + id, { method: 'DELETE' });
 
     getGuests().catch((error) => {
       console.log(error);

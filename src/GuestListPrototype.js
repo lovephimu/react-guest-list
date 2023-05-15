@@ -7,9 +7,11 @@ export default function GuestList() {
   const [guestListArray, setGuestListArray] = useState([]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const baseUrl =
+    'http://b5d6641b-b2e6-4cd0-8ab9-a642bd4fe26e.id.repl.co/guests/';
 
   async function getGuests() {
-    const response = await fetch('http://localhost:4000/guests');
+    const response = await fetch(baseUrl);
     const data = await response.json();
     await setGuestListArray(data);
     await setLoading(false);
@@ -27,7 +29,7 @@ export default function GuestList() {
   // }, [guestListArray]);
 
   async function createGuest(firstNameParameter, lastNameParameter) {
-    await fetch(`http://localhost:4000/guests`, {
+    await fetch(baseUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
