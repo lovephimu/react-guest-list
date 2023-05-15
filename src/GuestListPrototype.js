@@ -12,18 +12,14 @@ export default function GuestList() {
   async function getGuests() {
     const response = await fetch('http://localhost:4000/guests');
     const data = await response.json();
-    await setGuestListArray(data); // copying old data, pushing new fetched data and updating state in one go
+    await setGuestListArray(data);
   }
-
-  // first load useEffect
 
   useEffect(() => {
     getGuests().catch((error) => {
       console.log(error);
     });
   }, []);
-
-  // onChange useEffect
 
   useEffect(() => {
     setLoading(false);
