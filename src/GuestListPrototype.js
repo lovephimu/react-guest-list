@@ -12,7 +12,7 @@ export default function GuestList() {
     const response = await fetch('http://localhost:4000/guests');
     const data = await response.json();
     await setGuestListArray(data);
-    setLoading(false);
+    await setLoading(false);
   }
 
   useEffect(() => {
