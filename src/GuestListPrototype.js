@@ -24,7 +24,7 @@ export default function GuestList() {
   }, []);
 
   async function createGuest(firstNameParameter, lastNameParameter) {
-    const response = await fetch(baseUrl, {
+    await fetch(baseUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
