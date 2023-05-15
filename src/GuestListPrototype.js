@@ -27,6 +27,7 @@ export default function GuestList() {
 
   useEffect(() => {
     setLoading(false);
+    console.log('set to false');
   }, [guestListArray]);
 
   async function createGuest(firstNameParameter, lastNameParameter) {
