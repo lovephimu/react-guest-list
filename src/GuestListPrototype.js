@@ -23,11 +23,6 @@ export default function GuestList() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   setLoading(false);
-  //   console.log('set to false');
-  // }, [loading]);
-
   async function createGuest(firstNameParameter, lastNameParameter) {
     const response = await fetch(baseUrl, {
       method: 'POST',
@@ -45,7 +40,6 @@ export default function GuestList() {
     setLastName('');
 
     setGuestListArray(response);
-    };
   }
 
   if (loading) {
