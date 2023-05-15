@@ -28,10 +28,6 @@ export default function Guest(props) {
     const responseData = await response.json();
 
     setGuestArray(responseData);
-
-    getGuests().catch((error) => {
-      console.log(error);
-    });
   }
 
   async function deleteGuest(id) {
