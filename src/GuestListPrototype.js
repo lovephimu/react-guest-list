@@ -12,6 +12,7 @@ export default function GuestList() {
     const response = await fetch('http://localhost:4000/guests');
     const data = await response.json();
     await setGuestListArray(data);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -20,10 +21,10 @@ export default function GuestList() {
     });
   }, []);
 
-  useEffect(() => {
-    setLoading(false);
-    console.log('set to false');
-  }, [guestListArray]);
+  // useEffect(() => {
+  //   setLoading(false);
+  //   console.log('set to false');
+  // }, [guestListArray]);
 
   async function createGuest(firstNameParameter, lastNameParameter) {
     await fetch(`http://localhost:4000/guests`, {
@@ -44,6 +45,10 @@ export default function GuestList() {
     getGuests().catch((error) => {
       console.log(error);
     });
+  }
+
+  if (loading) {
+    return <div>loading...</div>;
   }
 
   return (
@@ -93,7 +98,7 @@ export default function GuestList() {
           />
         </div>
       </form>
-      {loading ? <div>Loading...</div> : <Guest list={guestListArray} />}
+      <Guest list={guestListArray} />
     </>
   );
 }
