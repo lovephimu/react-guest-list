@@ -17,13 +17,17 @@ export default function Guest(props) {
   }
 
   async function updateGuest(id, booleanItem) {
-    await fetch(baseUrl + id, {
+    const response = await fetch(baseUrl + id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ attending: booleanItem }),
     });
+
+    const responseData = await response.json();
+
+    setGuestArray(responseData);
 
     getGuests().catch((error) => {
       console.log(error);
