@@ -17,6 +17,7 @@ export default function GuestList() {
   // first load useEffect
 
   useEffect(() => {
+    setLoading(true);
     getGuests().catch((error) => {
       console.log(error);
     });
