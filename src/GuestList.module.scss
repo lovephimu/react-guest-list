@@ -45,7 +45,6 @@ body {
   box-sizing: border-box;
   background-color: $backgroundColorGrey;
   border: none;
-  // border: 1px dotted $frameColorWhite;
   border-radius: $borderRadius;
   box-shadow: inset 0px 0px 16px $shadowColorInset,
     0px 16px 16px $shadowColorOffset;
@@ -63,9 +62,6 @@ body {
 
 .basicFlexItemGuest {
   display: flex;
-  // justify-content: center;
-  // width: 100%;
-  // max-width: $maxWidth;
 }
 
 .basicFlexItem {

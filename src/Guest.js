@@ -25,7 +25,7 @@ export default function Guest(props) {
       body: JSON.stringify({ attending: booleanItem }),
     });
 
-    const actualIndex = guestArray.indexOf(id);
+    const actualIndex = guestArray.findIndex((obj) => obj.id === id);
     const copyArray = guestArray;
     copyArray[actualIndex].attending = booleanItem;
     setGuestArray(copyArray);
