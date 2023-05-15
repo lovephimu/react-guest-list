@@ -25,7 +25,8 @@ export default function GuestList() {
   // onChange useEffect
 
   useEffect(() => {
-    if (guestListArray.length >= 1) {
+    setLoading(false);
+    if (guestListArray.length === 0) {
       setLoading(false);
     }
   }, [guestListArray]);
