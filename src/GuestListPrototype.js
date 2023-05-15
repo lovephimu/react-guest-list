@@ -6,7 +6,7 @@ export default function GuestList() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [guestListArray, setGuestListArray] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   async function getGuests() {
     const response = await fetch('http://localhost:4000/guests');
