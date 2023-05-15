@@ -3,7 +3,6 @@ import Guest from './Guest';
 import styles from './GuestList.module.scss';
 
 export default function GuestList() {
-  const [input, setInput] = useState(true);
   const [loading, setLoading] = useState(true);
   const [guestListArray, setGuestListArray] = useState([]);
   const [firstName, setFirstName] = useState('');
@@ -25,11 +24,6 @@ export default function GuestList() {
     setLoading(false);
     console.log('set to false');
   }, [guestListArray]);
-
-  useEffect(() => {
-    setInput(false);
-    console.log('set to false');
-  }, [loading]);
 
   async function createGuest(firstNameParameter, lastNameParameter) {
     await fetch(`http://localhost:4000/guests`, {
@@ -73,7 +67,7 @@ export default function GuestList() {
           <input
             id="firstName"
             value={firstName}
-            disabled={input}
+            disabled={loading}
             onChange={(event) => {
               setFirstName(event.currentTarget.value);
             }}
@@ -83,7 +77,7 @@ export default function GuestList() {
           <input
             id="lastName"
             value={lastName}
-            disabled={input}
+            disabled={loading}
             onChange={(event) => {
               setLastName(event.currentTarget.value);
             }}
