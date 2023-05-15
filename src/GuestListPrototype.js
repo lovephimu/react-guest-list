@@ -6,7 +6,8 @@ export default function GuestList() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [guestListArray, setGuestListArray] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [input, setInput] = useState(true);
 
   async function getGuests() {
     const response = await fetch('http://localhost:4000/guests');
@@ -17,7 +18,6 @@ export default function GuestList() {
   // first load useEffect
 
   useEffect(() => {
-    setLoading(true);
     getGuests().catch((error) => {
       console.log(error);
     });
@@ -29,6 +29,11 @@ export default function GuestList() {
     setLoading(false);
     console.log('set to false');
   }, [guestListArray]);
+
+  useEffect(() => {
+    setInput(false);
+    console.log('set to false');
+  }, [loading]);
 
   async function createGuest(firstNameParameter, lastNameParameter) {
     await fetch(`http://localhost:4000/guests`, {
@@ -72,7 +77,7 @@ export default function GuestList() {
           <input
             id="firstName"
             value={firstName}
-            disabled={loading}
+            disabled={input}
             onChange={(event) => {
               setFirstName(event.currentTarget.value);
             }}
@@ -82,7 +87,7 @@ export default function GuestList() {
           <input
             id="lastName"
             value={lastName}
-            disabled={loading}
+            disabled={input}
             onChange={(event) => {
               setLastName(event.currentTarget.value);
             }}
