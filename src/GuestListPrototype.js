@@ -8,7 +8,7 @@ export default function GuestList() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const baseUrl =
-    'http://b5d6641b-b2e6-4cd0-8ab9-a642bd4fe26e.id.repl.co/guests/';
+    'https://b5d6641b-b2e6-4cd0-8ab9-a642bd4fe26e.id.repl.co/guests/';
 
   async function getGuests() {
     const response = await fetch(baseUrl);
