@@ -24,7 +24,7 @@ export default function GuestList() {
   }, []);
 
   async function createGuest(firstNameParameter, lastNameParameter) {
-    await fetch(baseUrl, {
+    const response = await fetch(baseUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,13 +35,14 @@ export default function GuestList() {
       }),
     });
 
+    const responseData = await response.json();
+    console.log(responseData);
+
     setFirstName('');
 
     setLastName('');
 
-    getGuests().catch((error) => {
-      console.log(error);
-    });
+    setGuestListArray([...guestListArray, responseData]);
   }
 
   if (loading) {
