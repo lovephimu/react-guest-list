@@ -4,7 +4,7 @@ import styles from './GuestList.module.scss';
 export default function Guest(props) {
   const [guestArray, setGuestArray] = useState([]);
   const baseUrl =
-    'http://b5d6641b-b2e6-4cd0-8ab9-a642bd4fe26e.id.repl.co/guests/';
+    'https://b5d6641b-b2e6-4cd0-8ab9-a642bd4fe26e.id.repl.co/guests/';
 
   useEffect(() => {
     setGuestArray([...props.list]);

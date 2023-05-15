@@ -23,10 +23,10 @@ export default function GuestList() {
     });
   }, []);
 
-  useEffect(() => {
-    setLoading(false);
-    console.log('set to false');
-  }, [loading]);
+  // useEffect(() => {
+  //   setLoading(false);
+  //   console.log('set to false');
+  // }, [loading]);
 
   async function createGuest(firstNameParameter, lastNameParameter) {
     await fetch(baseUrl, {
@@ -74,7 +74,7 @@ export default function GuestList() {
           <input
             id="firstName"
             value={firstName}
-            disabled={loading}
+            // disabled={loading}
             onChange={(event) => {
               setFirstName(event.currentTarget.value);
             }}
@@ -84,7 +84,7 @@ export default function GuestList() {
           <input
             id="lastName"
             value={lastName}
-            disabled={loading}
+            // disabled={loading}
             onChange={(event) => {
               setLastName(event.currentTarget.value);
             }}
