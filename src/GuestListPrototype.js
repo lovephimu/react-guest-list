@@ -39,12 +39,6 @@ export default function GuestList() {
 
     setLastName('');
 
-    // const newGuest = {
-    //   firstName: firstNameParameter,
-    //   lastName: lastNameParameter,
-    // };
-    // await setGuestListArray([...guestListArray, newGuest]);
-
     getGuests().catch((error) => {
       console.log(error);
     });
@@ -55,7 +49,7 @@ export default function GuestList() {
   }
 
   return (
-    <>
+    <main className={styles.upperFlex}>
       <h1 className={styles.basicFlex}>Guest List</h1>
       <form
         className={`${styles.basicBox} ${styles.basicBottomMargin}`}
@@ -75,7 +69,6 @@ export default function GuestList() {
           <input
             id="firstName"
             value={firstName}
-            // disabled={loading}
             onChange={(event) => {
               setFirstName(event.currentTarget.value);
             }}
@@ -85,7 +78,6 @@ export default function GuestList() {
           <input
             id="lastName"
             value={lastName}
-            // disabled={loading}
             onChange={(event) => {
               setLastName(event.currentTarget.value);
             }}
@@ -102,6 +94,6 @@ export default function GuestList() {
         </div>
       </form>
       <Guest list={guestListArray} />
-    </>
+    </main>
   );
 }
