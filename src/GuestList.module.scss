@@ -23,15 +23,23 @@ $textColorMediumDark: #6f7c80;
 // -values
 $borderRadius: 8px;
 
-$maxWidth: 1200px;
+$maxWidth: 600px;
 
 // Background Elements
 body {
   background-color: $backgroundColor;
   font-size: 1rem;
+  width: 100%;
 }
 
 // Middleground Elements
+
+.upperFlex {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+}
 
 .basicBox {
   box-sizing: border-box;
@@ -43,14 +51,21 @@ body {
     0px 16px 16px $shadowColorOffset;
   padding: 20px;
   margin: 20px;
-  max-width: $maxWidth;
+  max-width: 800px;
 }
 
 .basicFlex {
   display: flex;
   justify-content: center;
-  width: 100%;
   max-width: $maxWidth;
+  flex: 1;
+}
+
+.basicFlexItemGuest {
+  display: flex;
+  // justify-content: center;
+  // width: 100%;
+  // max-width: $maxWidth;
 }
 
 .basicFlexItem {

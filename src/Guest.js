@@ -42,45 +42,47 @@ export default function Guest(props) {
     <>
       {guestArray.map((item) => {
         return (
-          <section key={`user-${item.id}`}>
-            <div
-              data-test-id="guest"
-              className={`${styles.basicBox} ${styles.basicShadowMedium} ${styles.basicMarginSmall}`}
-            >
+          <section key={`user-${item.id}`} className={styles.upperFlex}>
+            <div>
               <div
-                className={`${styles.basicFlex} ${styles.basicJustifyLeft} ${styles.basicAlignCenter} ${styles.basicGap}`}
+                data-test-id="guest"
+                className={`${styles.basicBox} ${styles.basicShadowMedium} ${styles.basicMarginSmall}`}
               >
-                <div>{item.attending ? '💗' : '🤍'}</div>
-                <span className={styles.guestName}>
-                  {item.firstName} {item.lastName}
-                </span>
-                <span>:</span>
-                <span>{item.attending ? 'attending' : 'not attending'}</span>
                 <div
-                  className={`${styles.basicFlex} ${styles.basicFlexItem} ${styles.basicJustifySelfFlexEnd} ${styles.basicAlignCenter} ${styles.basicGap}`}
+                  className={`${styles.basicFlex} ${styles.basicJustifyLeft} ${styles.basicAlignCenter} ${styles.basicGap}`}
                 >
-                  <input
-                    type="checkbox"
-                    checked={item.attending}
-                    aria-label={`${item.firstName.toLowerCase()} ${item.lastName.toLowerCase()} attending status`}
-                    onChange={(event) => {
-                      updateGuest(item.id, event.currentTarget.checked).catch(
-                        (error) => {
-                          console.log(error);
-                        },
-                      );
-                    }}
-                  />
-                  <button
-                    aria-label={`Remove ${item.firstName} ${item.lastName}`}
-                    onClick={() => {
-                      deleteGuest(item.id).catch((error) => {
-                        console.log(error);
-                      });
-                    }}
+                  <div>{item.attending ? '💗' : '🤍'}</div>
+                  <span className={styles.guestName}>
+                    {item.firstName} {item.lastName}
+                  </span>
+                  <span>:</span>
+                  <span>{item.attending ? 'attending' : 'not attending'}</span>
+                  <div
+                    className={`${styles.basicFlex} ${styles.basicFlexItem} ${styles.basicJustifySelfFlexEnd} ${styles.basicAlignCenter} ${styles.basicGap}`}
                   >
-                    Remove
-                  </button>
+                    <input
+                      type="checkbox"
+                      checked={item.attending}
+                      aria-label={`${item.firstName.toLowerCase()} ${item.lastName.toLowerCase()} attending status`}
+                      onChange={(event) => {
+                        updateGuest(item.id, event.currentTarget.checked).catch(
+                          (error) => {
+                            console.log(error);
+                          },
+                        );
+                      }}
+                    />
+                    <button
+                      aria-label={`Remove ${item.firstName} ${item.lastName}`}
+                      onClick={() => {
+                        deleteGuest(item.id).catch((error) => {
+                          console.log(error);
+                        });
+                      }}
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

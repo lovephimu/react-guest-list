@@ -23,11 +23,6 @@ export default function GuestList() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   setLoading(false);
-  //   console.log('set to false');
-  // }, [loading]);
-
   async function createGuest(firstNameParameter, lastNameParameter) {
     await fetch(baseUrl, {
       method: 'POST',
@@ -44,6 +39,12 @@ export default function GuestList() {
 
     setLastName('');
 
+    // const newGuest = {
+    //   firstName: firstNameParameter,
+    //   lastName: lastNameParameter,
+    // };
+    // await setGuestListArray([...guestListArray, newGuest]);
+
     getGuests().catch((error) => {
       console.log(error);
     });
@@ -57,50 +58,52 @@ export default function GuestList() {
     <>
       <h1 className={styles.basicFlex}>Guest List</h1>
       <form
-        className={`${styles.basicBox} ${styles.basicBottomMargin}`}
+        className={styles.upperFlex}
         onSubmit={(event) => {
           event.preventDefault();
         }}
       >
-        <div className={styles.basicFlex}>
-          <div className={`${styles.structureBox} ${styles.subText}`}>
-            <label htmlFor="firstName">First name</label>
+        <div className={`${styles.basicBox} ${styles.basicBottomMargin}`}>
+          <div className={styles.basicFlex}>
+            <div className={`${styles.structureBox} ${styles.subText}`}>
+              <label htmlFor="firstName">First name</label>
+            </div>
+            <div className={`${styles.structureBox} ${styles.subText}`}>
+              <label htmlFor="lastName">Last name</label>
+            </div>
           </div>
-          <div className={`${styles.structureBox} ${styles.subText}`}>
-            <label htmlFor="lastName">Last name</label>
+          <div className={styles.basicFlex}>
+            <input
+              id="firstName"
+              value={firstName}
+              // disabled={loading}
+              onChange={(event) => {
+                setFirstName(event.currentTarget.value);
+              }}
+              placeholder="First name"
+              className={styles.structureBox}
+            />
+            <input
+              id="lastName"
+              value={lastName}
+              // disabled={loading}
+              onChange={(event) => {
+                setLastName(event.currentTarget.value);
+              }}
+              placeholder="Last name"
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  createGuest(firstName, lastName).catch((error) => {
+                    console.log(error);
+                  });
+                }
+              }}
+              className={styles.structureBox}
+            />
           </div>
         </div>
-        <div className={styles.basicFlex}>
-          <input
-            id="firstName"
-            value={firstName}
-            // disabled={loading}
-            onChange={(event) => {
-              setFirstName(event.currentTarget.value);
-            }}
-            placeholder="First name"
-            className={styles.structureBox}
-          />
-          <input
-            id="lastName"
-            value={lastName}
-            // disabled={loading}
-            onChange={(event) => {
-              setLastName(event.currentTarget.value);
-            }}
-            placeholder="Last name"
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') {
-                createGuest(firstName, lastName).catch((error) => {
-                  console.log(error);
-                });
-              }
-            }}
-            className={styles.structureBox}
-          />
-        </div>
+        <Guest list={guestListArray} />
       </form>
-      <Guest list={guestListArray} />
     </>
   );
 }
