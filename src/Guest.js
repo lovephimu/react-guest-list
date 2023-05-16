@@ -24,10 +24,17 @@ export default function Guest(props) {
       },
       body: JSON.stringify({ attending: booleanItem }),
     });
+
     const data = await response.json();
     console.log(data);
+    console.log(index);
 
-    setGuestArray([...guestArray.filter((guest) => guest.id !== id), data]);
+    const copyArray = [...guestArray];
+    copyArray[index] = data;
+
+    setGuestArray(copyArray);
+
+    // setGuestArray([data, ...guestArray.filter((guest) => guest.id !== id)]);
 
     // console.log(index);
     // const copyArray = guestArray;
