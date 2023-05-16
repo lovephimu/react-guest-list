@@ -16,7 +16,7 @@ export default function Guest(props) {
     await setGuestArray(data); // copying old data, pushing new fetched data and updating state in one go
   }
 
-  async function updateGuest(id, booleanItem) {
+  async function updateGuest(index, id, booleanItem) {
     await fetch(baseUrl + id, {
       method: 'PUT',
       headers: {
@@ -25,30 +25,24 @@ export default function Guest(props) {
       body: JSON.stringify({ attending: booleanItem }),
     });
 
-    // const actualIndex = guestArray.findIndex((obj) => obj.id === id);
-    // const copyArray = guestArray;
-    // copyArray[actualIndex].attending = booleanItem;
-    // setGuestArray(copyArray);
-
-    getGuests().catch((error) => {
-      console.log(error);
-    });
-  }
-
-  async function deleteGuest(id) {
-    await fetch(baseUrl + id, { method: 'DELETE' });
-
-    // const copyArray = guestArray.filter((guest) => guest.id !== id);
-    setGuestArray(guestArray.filter((guest) => guest.id !== id));
+    const copyArray = guestArray;
+    copyArray[index].attending = booleanItem;
+    setGuestArray(copyArray);
 
     // getGuests().catch((error) => {
     //   console.log(error);
     // });
   }
 
+  async function deleteGuest(id) {
+    await fetch(baseUrl + id, { method: 'DELETE' });
+
+    setGuestArray(guestArray.filter((guest) => guest.id !== id));
+  }
+
   return (
     <>
-      {guestArray.map((item) => {
+      {guestArray.map((item, index) => {
         return (
           <section key={`user-${item.id}`}>
             <div
@@ -72,11 +66,13 @@ export default function Guest(props) {
                     checked={item.attending}
                     aria-label={`${item.firstName.toLowerCase()} ${item.lastName.toLowerCase()} attending status`}
                     onChange={(event) => {
-                      updateGuest(item.id, event.currentTarget.checked).catch(
-                        (error) => {
-                          console.log(error);
-                        },
-                      );
+                      updateGuest(
+                        index,
+                        item.id,
+                        event.currentTarget.checked,
+                      ).catch((error) => {
+                        console.log(error);
+                      });
                     }}
                   />
                   <button
