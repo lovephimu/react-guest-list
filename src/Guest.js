@@ -10,12 +10,6 @@ export default function Guest(props) {
     setGuestArray([...props.list]);
   }, [props.list]);
 
-  async function getGuests() {
-    const response = await fetch(baseUrl);
-    const data = await response.json();
-    await setGuestArray(data); // copying old data, pushing new fetched data and updating state in one go
-  }
-
   async function updateGuest(index, id, booleanItem) {
     const response = await fetch(baseUrl + id, {
       method: 'PUT',
@@ -33,18 +27,6 @@ export default function Guest(props) {
     copyArray[index] = data;
 
     setGuestArray(copyArray);
-
-    // setGuestArray([data, ...guestArray.filter((guest) => guest.id !== id)]);
-
-    // console.log(index);
-    // const copyArray = guestArray;
-    // copyArray[index].attending = booleanItem;
-    // console.log(copyArray);
-    // setGuestArray(copyArray);
-
-    // getGuests().catch((error) => {
-    //   console.log(error);
-    // });
   }
 
   async function deleteGuest(id) {
