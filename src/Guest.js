@@ -17,16 +17,22 @@ export default function Guest(props) {
   }
 
   async function updateGuest(index, id, booleanItem) {
-    await fetch(baseUrl + id, {
+    const response = await fetch(baseUrl + id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ attending: booleanItem }),
     });
+    const data = await response.json();
+    console.log(data);
 
+    setGuestArray([...guestArray.filter((guest) => guest.id !== id), data]);
+
+    // console.log(index);
     // const copyArray = guestArray;
     // copyArray[index].attending = booleanItem;
+    // console.log(copyArray);
     // setGuestArray(copyArray);
 
     // getGuests().catch((error) => {
