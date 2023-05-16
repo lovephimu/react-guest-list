@@ -38,9 +38,12 @@ export default function Guest(props) {
   async function deleteGuest(id) {
     await fetch(baseUrl + id, { method: 'DELETE' });
 
-    getGuests().catch((error) => {
-      console.log(error);
-    });
+    // const copyArray = guestArray.filter((guest) => guest.id !== id);
+    setGuestArray(guestArray.filter((guest) => guest.id !== id));
+
+    // getGuests().catch((error) => {
+    //   console.log(error);
+    // });
   }
 
   return (
