@@ -25,9 +25,9 @@ export default function Guest(props) {
       body: JSON.stringify({ attending: booleanItem }),
     });
 
-    const copyArray = guestArray;
-    copyArray[index].attending = booleanItem;
-    setGuestArray(copyArray);
+    // const copyArray = guestArray;
+    // copyArray[index].attending = booleanItem;
+    // setGuestArray(copyArray);
 
     // getGuests().catch((error) => {
     //   console.log(error);
