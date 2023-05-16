@@ -25,10 +25,14 @@ export default function Guest(props) {
       body: JSON.stringify({ attending: booleanItem }),
     });
 
-    const actualIndex = guestArray.findIndex((obj) => obj.id === id);
-    const copyArray = guestArray;
-    copyArray[actualIndex].attending = booleanItem;
-    setGuestArray(copyArray);
+    // const actualIndex = guestArray.findIndex((obj) => obj.id === id);
+    // const copyArray = guestArray;
+    // copyArray[actualIndex].attending = booleanItem;
+    // setGuestArray(copyArray);
+
+    getGuests().catch((error) => {
+      console.log(error);
+    });
   }
 
   async function deleteGuest(id) {
